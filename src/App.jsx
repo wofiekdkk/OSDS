@@ -1047,7 +1047,7 @@ export default function App() {
 
   return (
     <div style={{minHeight:'100vh',background:'#f4f7fb',color:'#e2e8f0',fontFamily:'"Courier New",monospace',padding:0}}>
-      <div style={{position:'fixed',inset:0,pointerEvents:'none',zIndex:0,backgroundImage:'repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.12) 2px,rgba(0,0,0,0.12) 4px)'}}/>
+      <div style={{position:'fixed',inset:0,pointerEvents:'none',zIndex:0,backgroundImage:'repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(15,23,42,0.025) 2px,rgba(15,23,42,0.025) 4px)'}}/>
 
       {/* Header */}
       <div style={{background:'linear-gradient(90deg,#ffffff,#f1f5f9,#ffffff)',borderBottom:'1px solid #d8e1ee',padding:'14px 24px',position:'sticky',top:0,zIndex:100,display:'flex',justifyContent:'space-between',alignItems:'center'}}>
@@ -1062,7 +1062,7 @@ export default function App() {
           {Object.entries(statCounts).map(([state,count])=>(
             <div key={state} style={{textAlign:'center'}}>
               <div style={{color:statColors[state],fontSize:18,fontWeight:900}}>{count}</div>
-              <div style={{color:'#d8e1ee',fontSize:7,letterSpacing:1}}>{state}</div>
+              <div style={{color:'#64748b',fontSize:7,letterSpacing:1}}>{state}</div>
             </div>
           ))}
         </div>
