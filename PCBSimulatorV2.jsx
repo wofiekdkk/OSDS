@@ -1113,6 +1113,10 @@ export default function App() {
         ::-webkit-scrollbar-track{background:#eef2f7;}
         ::-webkit-scrollbar-thumb{background:#d8e1ee;border-radius:2px;}
         select option{background:#ffffff;color:#0f172a;}
+        input::placeholder{color:#94a3b8;opacity:1;}
+        button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #818cf8;outline-offset:2px;}
+        @media(max-width:980px){.pcb-main-grid{grid-template-columns:1fr!important;}}
+        @media(max-width:640px){.pcb-header{align-items:flex-start!important;flex-direction:column!important;gap:12px!important;padding:12px!important}.pcb-stats{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;gap:10px!important}.pcb-content{padding:12px!important}.pcb-tabs button{flex:1 1 auto;}}
       `}</style>
     </div>
   );
