@@ -4,16 +4,16 @@ import { useState, useEffect, useRef } from "react";
 // DATA LAYER
 // ============================================
 const STATE_COLORS = {
-  NEW:        { bg:'#f3e8ff', border:'#7c3aed', text:'#c4b5fd', glow:'#7c3aed' },
-  READY:      { bg:'#dcfce7', border:'#16a34a', text:'#4ade80', glow:'#16a34a' },
-  RUNNING:    { bg:'#fef3c7', border:'#f59e0b', text:'#fcd34d', glow:'#f59e0b' },
-  WAITING:    { bg:'#dbeafe', border:'#3b82f6', text:'#93c5fd', glow:'#3b82f6' },
-  TERMINATED: { bg:'#fee2e2', border:'#ef4444', text:'#fca5a5', glow:'#ef4444' },
-  SUSPENDED:  { bg:'#fef3c7', border:'#a16207', text:'#fde68a', glow:'#a16207' },
+  NEW:        { bg:'#f3e8ff', border:'#7c3aed', text:'#6d28d9', glow:'#7c3aed' },
+  READY:      { bg:'#dcfce7', border:'#16a34a', text:'#166534', glow:'#16a34a' },
+  RUNNING:    { bg:'#fef3c7', border:'#f59e0b', text:'#92400e', glow:'#f59e0b' },
+  WAITING:    { bg:'#dbeafe', border:'#3b82f6', text:'#1d4ed8', glow:'#3b82f6' },
+  TERMINATED: { bg:'#fee2e2', border:'#ef4444', text:'#b91c1c', glow:'#ef4444' },
+  SUSPENDED:  { bg:'#fef3c7', border:'#a16207', text:'#854d0e', glow:'#a16207' },
 };
 const STATE_ICONS = { NEW:'🆕', READY:'⏳', RUNNING:'⚡', WAITING:'🔵', TERMINATED:'💀', SUSPENDED:'💤' };
 const PRIORITY_LEVELS = {
-  1:{label:'CRITICAL',color:'#ef4444'}, 2:{label:'HIGH',color:'#f97316'},
+  1:{label:'CRITICAL',color:'#ef4444'}, 2:{label:'HIGH',color:'#c2410c'},
   3:{label:'MEDIUM',color:'#eab308'},   4:{label:'LOW',color:'#22c55e'},
   5:{label:'IDLE',color:'#6b7280'},
 };
@@ -93,8 +93,8 @@ function ProcessTable({processes,onSelect,selectedPid}) {
       <div style={{padding:'14px 20px',background:'linear-gradient(90deg,#f1f5f9,#f5f3ff)',borderBottom:'1px solid #d8e1ee',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
         <div style={{display:'flex',alignItems:'center',gap:10}}>
           <span style={{fontSize:16}}>🗂️</span>
-          <span style={{color:'#a78bfa',fontWeight:700,fontSize:13,letterSpacing:2}}>PROCESS TABLE</span>
-          <span style={{background:'#7c3aed22',border:'1px solid #7c3aed55',color:'#a78bfa',borderRadius:20,padding:'1px 10px',fontSize:10}}>{processes.length} processes</span>
+          <span style={{color:'#6d28d9',fontWeight:700,fontSize:13,letterSpacing:2}}>PROCESS TABLE</span>
+          <span style={{background:'#7c3aed22',border:'1px solid #7c3aed55',color:'#6d28d9',borderRadius:20,padding:'1px 10px',fontSize:10}}>{processes.length} processes</span>
         </div>
         <div style={{display:'flex',gap:6}}>
           {['pid','priority','state'].map(k=>(
@@ -117,14 +117,14 @@ function ProcessTable({processes,onSelect,selectedPid}) {
               onMouseEnter={e=>!isSel&&(e.currentTarget.style.background='#f8fafc')}
               onMouseLeave={e=>!isSel&&(e.currentTarget.style.background='transparent')}
             >
-              <div style={{color:'#6366f1',fontSize:12,fontWeight:700}}>#{p.pid}</div>
+              <div style={{color:'#4338ca',fontSize:12,fontWeight:700}}>#{p.pid}</div>
               <div>
-                <div style={{color:'#e2e8f0',fontSize:12}}>{p.name}</div>
+                <div style={{color:'#334155',fontSize:12}}>{p.name}</div>
                 {p.parentPid&&<div style={{color:'#64748b',fontSize:9}}>child of #{p.parentPid}</div>}
               </div>
               <StateBadge state={p.state} glow={isRun}/>
               <div style={{color:PRIORITY_LEVELS[p.priority]?.color,fontSize:11,fontWeight:700}}>P{p.priority}</div>
-              <div style={{color:'#94a3b8',fontSize:11}}>{p.memoryStart}–{p.memoryEnd}
+              <div style={{color:'#475569',fontSize:11}}>{p.memoryStart}–{p.memoryEnd}
                 <span style={{color:'#64748b',marginLeft:3}}>({p.memoryEnd-p.memoryStart}KB)</span>
               </div>
               <div style={{display:'flex',flexDirection:'column',gap:3,justifyContent:'center'}}>
@@ -172,7 +172,7 @@ function StateDiagram({processes}) {
     <div style={{background:'#ffffff',border:'1px solid #d8e1ee',borderRadius:16,overflow:'hidden',fontFamily:'"Courier New",monospace'}}>
       <div style={{padding:'14px 20px',background:'linear-gradient(90deg,#f1f5f9,#f5f3ff)',borderBottom:'1px solid #d8e1ee',display:'flex',alignItems:'center',gap:10}}>
         <span style={{fontSize:16}}>🔄</span>
-        <span style={{color:'#a78bfa',fontWeight:700,fontSize:13,letterSpacing:2}}>STATE LIFECYCLE DIAGRAM</span>
+        <span style={{color:'#6d28d9',fontWeight:700,fontSize:13,letterSpacing:2}}>STATE LIFECYCLE DIAGRAM</span>
       </div>
       <div style={{padding:20,overflowX:'auto'}}>
         <svg width="600" height="250" style={{display:'block',margin:'0 auto'}}>
@@ -271,24 +271,24 @@ function QueueVisualizer({processes}) {
     <div style={{background:'#ffffff',border:'1px solid #d8e1ee',borderRadius:16,overflow:'hidden',fontFamily:'"Courier New",monospace'}}>
       <div style={{padding:'14px 20px',background:'linear-gradient(90deg,#f1f5f9,#f5f3ff)',borderBottom:'1px solid #d8e1ee',display:'flex',alignItems:'center',gap:10}}>
         <span>📊</span>
-        <span style={{color:'#a78bfa',fontWeight:700,fontSize:13,letterSpacing:2}}>QUEUES, MEMORY & SCHEDULERS</span>
+        <span style={{color:'#6d28d9',fontWeight:700,fontSize:13,letterSpacing:2}}>QUEUES, MEMORY & SCHEDULERS</span>
       </div>
       <div style={{padding:'16px 20px',display:'flex',flexDirection:'column',gap:16}}>
 
         {/* Degree of Multiprogramming */}
         <div style={{background:'#eef2f7',border:'1px solid #d8e1ee',borderRadius:10,padding:'12px 16px',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
           <div>
-            <div style={{color:'#a78bfa',fontSize:10,fontWeight:700,letterSpacing:1}}>DEGREE OF MULTIPROGRAMMING</div>
+            <div style={{color:'#6d28d9',fontSize:10,fontWeight:700,letterSpacing:1}}>DEGREE OF MULTIPROGRAMMING</div>
             <div style={{color:'#64748b',fontSize:9,marginTop:2}}>Number of processes currently in RAM</div>
           </div>
-          <div style={{color:'#fcd34d',fontSize:32,fontWeight:900}}>{degreeOfMP}</div>
+          <div style={{color:'#92400e',fontSize:32,fontWeight:900}}>{degreeOfMP}</div>
         </div>
 
         {/* 3 Scheduler Cards */}
         <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:10}}>
           {[
             {name:'LTS',full:'Long Term Scheduler',color:'#7c3aed',desc:'Controls Degree of Multiprogramming. Picks from Job Queue → loads into RAM.',icon:'📥'},
-            {name:'STS',full:'Short Term Scheduler',color:'#f59e0b',desc:'CPU Scheduler. Picks from Ready Queue → dispatches to CPU. Runs every ~10ms.',icon:'⚡'},
+            {name:'STS',full:'Short Term Scheduler',color:'#92400e',desc:'CPU Scheduler. Picks from Ready Queue → dispatches to CPU. Runs every ~10ms.',icon:'⚡'},
             {name:'MTS',full:'Medium Term Scheduler',color:'#3b82f6',desc:'Handles Swapping. Moves processes RAM ↔ Disk to free up memory.',icon:'🔄'},
           ].map(sch=>(
             <div key={sch.name} style={{background:'#eef2f7',border:`1px solid ${sch.color}44`,borderRadius:10,padding:'12px'}}>
@@ -296,7 +296,7 @@ function QueueVisualizer({processes}) {
                 <span>{sch.icon}</span>
                 <span style={{color:sch.color,fontWeight:700,fontSize:12}}>{sch.name}</span>
               </div>
-              <div style={{color:'#a78bfa',fontSize:9,marginBottom:4}}>{sch.full}</div>
+              <div style={{color:'#6d28d9',fontSize:9,marginBottom:4}}>{sch.full}</div>
               <div style={{color:'#64748b',fontSize:9,lineHeight:1.5}}>{sch.desc}</div>
             </div>
           ))}
@@ -314,10 +314,10 @@ function QueueVisualizer({processes}) {
           <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:8}}>
             <div style={{display:'flex',alignItems:'center',gap:7}}>
               <span>🧠</span>
-              <span style={{color:'#22d3ee',fontSize:10,fontWeight:700,letterSpacing:1}}>MEMORY MAP</span>
+              <span style={{color:'#0e7490',fontSize:10,fontWeight:700,letterSpacing:1}}>MEMORY MAP</span>
               <span style={{color:'#64748b',fontSize:9}}>({TOTAL} KB total)</span>
             </div>
-            <span style={{color:'#4ade80',fontSize:10}}>{usedMem} KB used / {TOTAL-usedMem} KB free</span>
+            <span style={{color:'#166534',fontSize:10}}>{usedMem} KB used / {TOTAL-usedMem} KB free</span>
           </div>
           <div style={{background:'#eef2f7',borderRadius:8,padding:10,border:'1px solid #0f1f2a'}}>
             <div style={{height:32,borderRadius:6,overflow:'hidden',background:'#ffffff',position:'relative',border:'1px solid #f1f5f9',display:'flex'}}>
@@ -403,11 +403,11 @@ function CPUScheduling({processes}) {
   const ALGOS=[
     {id:'FCFS',label:'FCFS',full:'First Come First Served',color:'#7c3aed',
      desc:'Process that arrives first gets CPU first. Simple, non-preemptive. May cause convoy effect.'},
-    {id:'SJF', label:'SJF', full:'Shortest Job First',    color:'#22d3ee',
+    {id:'SJF', label:'SJF', full:'Shortest Job First',    color:'#0e7490',
      desc:'Process with shortest burst time runs first. Minimum average waiting time. Non-preemptive.'},
-    {id:'PRIORITY',label:'Priority',full:'Priority Scheduling',color:'#f97316',
+    {id:'PRIORITY',label:'Priority',full:'Priority Scheduling',color:'#c2410c',
      desc:'Highest priority PCB field wins the CPU. P1=Critical runs before P5=Idle. May cause starvation.'},
-    {id:'RR',  label:'RR',  full:'Round Robin',           color:'#4ade80',
+    {id:'RR',  label:'RR',  full:'Round Robin',           color:'#166534',
      desc:'Each process gets equal time quantum (3ms here). Fair, preemptive. Good for time-sharing.'},
   ];
 
@@ -415,7 +415,7 @@ function CPUScheduling({processes}) {
     <div style={{background:'#ffffff',border:'1px solid #d8e1ee',borderRadius:16,overflow:'hidden',fontFamily:'"Courier New",monospace'}}>
       <div style={{padding:'14px 20px',background:'linear-gradient(90deg,#f1f5f9,#f5f3ff)',borderBottom:'1px solid #d8e1ee',display:'flex',alignItems:'center',gap:10}}>
         <span>⚙️</span>
-        <span style={{color:'#a78bfa',fontWeight:700,fontSize:13,letterSpacing:2}}>CPU SCHEDULING ALGORITHMS</span>
+        <span style={{color:'#6d28d9',fontWeight:700,fontSize:13,letterSpacing:2}}>CPU SCHEDULING ALGORITHMS</span>
       </div>
       <div style={{padding:'16px 20px',display:'flex',flexDirection:'column',gap:16}}>
 
@@ -424,7 +424,7 @@ function CPUScheduling({processes}) {
           {ALGOS.map(a=>(
             <button key={a.id} onClick={()=>setAlgo(a.id)} style={{background:algo===a.id?`${a.color}22`:'#eef2f7',border:`1px solid ${algo===a.id?a.color:'#d8e1ee'}`,borderRadius:10,padding:'10px 8px',cursor:'pointer',textAlign:'left',transition:'all 0.2s'}}>
               <div style={{color:a.color,fontWeight:700,fontSize:13,marginBottom:3}}>{a.label}</div>
-              <div style={{color:'#a78bfa',fontSize:9}}>{a.full}</div>
+              <div style={{color:'#6d28d9',fontSize:9}}>{a.full}</div>
             </button>
           ))}
         </div>
@@ -433,40 +433,40 @@ function CPUScheduling({processes}) {
         {ALGOS.filter(a=>a.id===algo).map(a=>(
           <div key={a.id} style={{background:'#eef2f7',border:`1px solid ${a.color}44`,borderRadius:10,padding:'12px 16px'}}>
             <div style={{color:a.color,fontWeight:700,fontSize:12,marginBottom:6}}>{a.full}</div>
-            <div style={{color:'#94a3b8',fontSize:11,lineHeight:1.6}}>{a.desc}</div>
+            <div style={{color:'#475569',fontSize:11,lineHeight:1.6}}>{a.desc}</div>
           </div>
         ))}
 
         {/* Dispatcher info */}
         <div style={{background:'#eef2f7',border:'1px solid #f59e0b44',borderRadius:10,padding:'12px 16px'}}>
-          <div style={{color:'#f59e0b',fontWeight:700,fontSize:11,marginBottom:4}}>⚡ DISPATCHER</div>
+          <div style={{color:'#92400e',fontWeight:700,fontSize:11,marginBottom:4}}>⚡ DISPATCHER</div>
           <div style={{color:'#64748b',fontSize:10,lineHeight:1.6}}>
             The Dispatcher gives actual CPU control to the process selected by the Short Term Scheduler (STS).
             It handles: Context switch → switching to user mode → jumping to correct program counter location.
-            <span style={{color:'#f97316'}}> Dispatch Latency</span> = time taken to stop one process and start another.
+            <span style={{color:'#c2410c'}}> Dispatch Latency</span> = time taken to stop one process and start another.
           </div>
         </div>
 
         {/* Execution order */}
         {scheduled.length>0&&(
           <div>
-            <div style={{color:'#6366f1',fontSize:9,letterSpacing:2,marginBottom:8,fontWeight:700}}>◆ EXECUTION ORDER ({algo})</div>
+            <div style={{color:'#4338ca',fontSize:9,letterSpacing:2,marginBottom:8,fontWeight:700}}>◆ EXECUTION ORDER ({algo})</div>
             <div style={{display:'flex',flexDirection:'column',gap:6}}>
               {scheduled.map((p,i)=>{
                 const sc=SC(p.state);
                 return (
                   <div key={p.pid} style={{display:'flex',alignItems:'center',gap:12,background:'#eef2f7',borderRadius:8,padding:'8px 12px',border:`1px solid #d8e1ee`}}>
                     <div style={{color:'#64748b',fontSize:12,fontWeight:700,minWidth:20}}>#{i+1}</div>
-                    <div style={{color:'#6366f1',fontSize:11,fontWeight:700,minWidth:50}}>#{p.pid}</div>
-                    <div style={{color:'#e2e8f0',fontSize:11,minWidth:120}}>{p.name}</div>
+                    <div style={{color:'#4338ca',fontSize:11,fontWeight:700,minWidth:50}}>#{p.pid}</div>
+                    <div style={{color:'#334155',fontSize:11,minWidth:120}}>{p.name}</div>
                     <div style={{flex:1}}>
                       <div style={{display:'flex',gap:16,fontSize:10}}>
                         <span style={{color:'#64748b'}}>Burst: <span style={{color:sc.text}}>{p.burstTime}ms</span></span>
                         <span style={{color:'#64748b'}}>Priority: <span style={{color:PRIORITY_LEVELS[p.priority]?.color}}>P{p.priority}</span></span>
-                        <span style={{color:'#64748b'}}>Arrival: <span style={{color:'#94a3b8'}}>{p.arrivalTime}</span></span>
+                        <span style={{color:'#64748b'}}>Arrival: <span style={{color:'#475569'}}>{p.arrivalTime}</span></span>
                       </div>
                     </div>
-                    {i===0&&<span style={{background:'#f59e0b22',border:'1px solid #f59e0b',color:'#fcd34d',borderRadius:5,padding:'2px 8px',fontSize:9,fontWeight:700}}>NEXT ON CPU</span>}
+                    {i===0&&<span style={{background:'#f59e0b22',border:'1px solid #f59e0b',color:'#92400e',borderRadius:5,padding:'2px 8px',fontSize:9,fontWeight:700}}>NEXT ON CPU</span>}
                   </div>
                 );
               })}
@@ -477,7 +477,7 @@ function CPUScheduling({processes}) {
         {/* Gantt Chart */}
         {gantt.length>0&&(
           <div>
-            <div style={{color:'#6366f1',fontSize:9,letterSpacing:2,marginBottom:8,fontWeight:700}}>◆ GANTT CHART</div>
+            <div style={{color:'#4338ca',fontSize:9,letterSpacing:2,marginBottom:8,fontWeight:700}}>◆ GANTT CHART</div>
             <div style={{background:'#eef2f7',borderRadius:10,padding:'12px',border:'1px solid #d8e1ee',overflowX:'auto'}}>
               <div style={{display:'flex',minWidth:'max-content',height:36,position:'relative'}}>
                 {gantt.map((g,i)=>{
@@ -564,7 +564,7 @@ function ContextSwitch({processes,onContextSwitch}) {
     <div style={{background:'#ffffff',border:'1px solid #d8e1ee',borderRadius:16,overflow:'hidden',fontFamily:'"Courier New",monospace'}}>
       <div style={{padding:'14px 20px',background:'linear-gradient(90deg,#f1f5f9,#f5f3ff)',borderBottom:'1px solid #d8e1ee',display:'flex',alignItems:'center',gap:10}}>
         <span>🔁</span>
-        <span style={{color:'#a78bfa',fontWeight:700,fontSize:13,letterSpacing:2}}>CONTEXT SWITCH SIMULATOR</span>
+        <span style={{color:'#6d28d9',fontWeight:700,fontSize:13,letterSpacing:2}}>CONTEXT SWITCH SIMULATOR</span>
       </div>
       <div style={{padding:'16px 20px',display:'flex',flexDirection:'column',gap:14}}>
         {/* Phase steps */}
@@ -583,12 +583,12 @@ function ContextSwitch({processes,onContextSwitch}) {
         {/* Visual */}
         <div style={{background:'#ffffff',border:'1px solid #1a1a2e',borderRadius:10,padding:14,display:'flex',alignItems:'center',gap:12,justifyContent:'center'}}>
           <div style={{textAlign:'center',minWidth:100}}>
-            <div style={{color:'#f97316',fontSize:9,letterSpacing:1,marginBottom:4}}>FROM (RUNNING)</div>
+            <div style={{color:'#c2410c',fontSize:9,letterSpacing:1,marginBottom:4}}>FROM (RUNNING)</div>
             {fromPid?(()=>{const p=processes.find(x=>x.pid===parseInt(fromPid));const sc=SC(p?.state||'RUNNING');return(<div style={{background:sc.bg,border:`1px solid ${sc.border}`,borderRadius:8,padding:'8px 12px',color:sc.text,fontSize:10,fontWeight:700}}><div>#{p?.pid}</div><div style={{color:'#64748b',marginTop:2}}>{p?.name}</div></div>);})():<div style={{color:'#64748b',fontSize:10}}>select process</div>}
           </div>
           <div style={{background:phase==='saving'?'#fef3c7':phase==='loading'?'#dbeafe':phase==='done'?'#dcfce7':'#111120',border:`2px solid ${phase==='saving'?'#f59e0b':phase==='loading'?'#3b82f6':phase==='done'?'#4ade80':'#d8e1ee'}`,borderRadius:12,padding:'12px 20px',textAlign:'center',transition:'all 0.4s',minWidth:90}}>
             <div style={{fontSize:20}}>🖥️</div>
-            <div style={{color:'#a78bfa',fontSize:10,fontWeight:700,letterSpacing:1}}>CPU</div>
+            <div style={{color:'#6d28d9',fontSize:10,fontWeight:700,letterSpacing:1}}>CPU</div>
             <div style={{color:'#64748b',fontSize:8,marginTop:2}}>{phase==='saving'?'SAVING...':phase==='dispatching'?'DISPATCH...':phase==='loading'?'LOADING...':phase==='done'?'DONE!':'READY'}</div>
           </div>
           <div style={{color:'#d8e1ee',fontSize:20}}>⟷</div>
@@ -601,15 +601,15 @@ function ContextSwitch({processes,onContextSwitch}) {
         {/* Selectors */}
         <div style={{display:'flex',gap:10}}>
           <div style={{flex:1}}>
-            <div style={{color:'#f97316',fontSize:9,letterSpacing:1,marginBottom:5}}>FROM (RUNNING)</div>
-            <select value={fromPid} onChange={e=>setFromPid(e.target.value)} style={{width:'100%',background:'#ffffff',border:'1px solid #d8e1ee',color:'#e2e8f0',borderRadius:6,padding:'7px 10px',fontSize:11,fontFamily:'monospace'}}>
+            <div style={{color:'#c2410c',fontSize:9,letterSpacing:1,marginBottom:5}}>FROM (RUNNING)</div>
+            <select value={fromPid} onChange={e=>setFromPid(e.target.value)} style={{width:'100%',background:'#ffffff',border:'1px solid #d8e1ee',color:'#334155',borderRadius:6,padding:'7px 10px',fontSize:11,fontFamily:'monospace'}}>
               <option value="">— select —</option>
               {running.map(p=><option key={p.pid} value={p.pid}>#{p.pid} {p.name}</option>)}
             </select>
           </div>
           <div style={{flex:1}}>
             <div style={{color:'#3b82f6',fontSize:9,letterSpacing:1,marginBottom:5}}>TO (READY)</div>
-            <select value={toPid} onChange={e=>setToPid(e.target.value)} style={{width:'100%',background:'#ffffff',border:'1px solid #d8e1ee',color:'#e2e8f0',borderRadius:6,padding:'7px 10px',fontSize:11,fontFamily:'monospace'}}>
+            <select value={toPid} onChange={e=>setToPid(e.target.value)} style={{width:'100%',background:'#ffffff',border:'1px solid #d8e1ee',color:'#334155',borderRadius:6,padding:'7px 10px',fontSize:11,fontFamily:'monospace'}}>
               <option value="">— select —</option>
               {ready.filter(p=>p.pid!==parseInt(fromPid)).map(p=><option key={p.pid} value={p.pid}>#{p.pid} {p.name}</option>)}
             </select>
@@ -644,16 +644,16 @@ function SpecialProcesses({processes,onStateChange,onCreateChild,onReap}) {
     <div style={{background:'#ffffff',border:'1px solid #d8e1ee',borderRadius:16,overflow:'hidden',fontFamily:'"Courier New",monospace'}}>
       <div style={{padding:'14px 20px',background:'linear-gradient(90deg,#f1f5f9,#f5f3ff)',borderBottom:'1px solid #d8e1ee',display:'flex',alignItems:'center',gap:10}}>
         <span>👻</span>
-        <span style={{color:'#a78bfa',fontWeight:700,fontSize:13,letterSpacing:2}}>ZOMBIE & ORPHAN PROCESSES</span>
+        <span style={{color:'#6d28d9',fontWeight:700,fontSize:13,letterSpacing:2}}>ZOMBIE & ORPHAN PROCESSES</span>
       </div>
       <div style={{padding:'16px 20px',display:'flex',flexDirection:'column',gap:16}}>
 
         {/* Explain cards */}
         <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
           <div style={{background:'#eef2f7',border:'1px solid #ef444444',borderRadius:10,padding:'12px'}}>
-            <div style={{color:'#fca5a5',fontWeight:700,fontSize:12,marginBottom:6}}>💀 ZOMBIE PROCESS</div>
+            <div style={{color:'#b91c1c',fontWeight:700,fontSize:12,marginBottom:6}}>💀 ZOMBIE PROCESS</div>
             <div style={{color:'#64748b',fontSize:10,lineHeight:1.7}}>
-              Child process has <span style={{color:'#fca5a5'}}>finished execution</span> but its PCB entry still exists because the parent has not yet called <span style={{color:'#fcd34d'}}>wait()</span> to read its exit status.<br/><br/>
+              Child process has <span style={{color:'#b91c1c'}}>finished execution</span> but its PCB entry still exists because the parent has not yet called <span style={{color:'#92400e'}}>wait()</span> to read its exit status.<br/><br/>
               <span style={{color:'#64748b'}}>Fix: Parent calls wait() → reaps zombie → PCB deleted.</span>
             </div>
           </div>
@@ -661,7 +661,7 @@ function SpecialProcesses({processes,onStateChange,onCreateChild,onReap}) {
             <div style={{color:'#fdba74',fontWeight:700,fontSize:12,marginBottom:6}}>👶 ORPHAN PROCESS</div>
             <div style={{color:'#64748b',fontSize:10,lineHeight:1.7}}>
               Child process is <span style={{color:'#fdba74'}}>still running</span> but its parent has been terminated.<br/><br/>
-              <span style={{color:'#4ade80'}}>OS Fix: Init process (PID=1) automatically adopts all orphans and becomes their new parent.</span>
+              <span style={{color:'#166534'}}>OS Fix: Init process (PID=1) automatically adopts all orphans and becomes their new parent.</span>
             </div>
           </div>
         </div>
@@ -669,20 +669,20 @@ function SpecialProcesses({processes,onStateChange,onCreateChild,onReap}) {
         {/* Init Process */}
         <div style={{background:'#eef2f7',border:'1px solid #7c3aed44',borderRadius:10,padding:'12px 16px',display:'flex',alignItems:'center',gap:12}}>
           <div style={{background:'#7c3aed33',border:'1px solid #7c3aed',borderRadius:8,padding:'8px 14px',textAlign:'center'}}>
-            <div style={{color:'#a78bfa',fontWeight:700,fontSize:14}}>PID 1</div>
+            <div style={{color:'#6d28d9',fontWeight:700,fontSize:14}}>PID 1</div>
             <div style={{color:'#7c3aed',fontSize:9}}>init</div>
           </div>
           <div>
-            <div style={{color:'#a78bfa',fontWeight:700,fontSize:11}}>Init Process — First process created by OS</div>
+            <div style={{color:'#6d28d9',fontWeight:700,fontSize:11}}>Init Process — First process created by OS</div>
             <div style={{color:'#64748b',fontSize:10,marginTop:3}}>Adopts all orphan processes. Always running. Never terminates. Parent of all parentless processes.</div>
           </div>
         </div>
 
         {/* Create child process */}
         <div style={{background:'#eef2f7',border:'1px solid #d8e1ee',borderRadius:10,padding:'12px'}}>
-          <div style={{color:'#6366f1',fontSize:10,fontWeight:700,letterSpacing:1,marginBottom:8}}>◆ CREATE CHILD PROCESS (fork simulation)</div>
+          <div style={{color:'#4338ca',fontSize:10,fontWeight:700,letterSpacing:1,marginBottom:8}}>◆ CREATE CHILD PROCESS (fork simulation)</div>
           <div style={{display:'flex',gap:10,alignItems:'center'}}>
-            <select value={selParent} onChange={e=>setSelParent(e.target.value)} style={{flex:1,background:'#ffffff',border:'1px solid #d8e1ee',color:'#e2e8f0',borderRadius:6,padding:'7px 10px',fontSize:11,fontFamily:'monospace'}}>
+            <select value={selParent} onChange={e=>setSelParent(e.target.value)} style={{flex:1,background:'#ffffff',border:'1px solid #d8e1ee',color:'#334155',borderRadius:6,padding:'7px 10px',fontSize:11,fontFamily:'monospace'}}>
               <option value="">— select parent process —</option>
               {parents.map(p=><option key={p.pid} value={p.pid}>#{p.pid} {p.name}</option>)}
             </select>
@@ -695,14 +695,14 @@ function SpecialProcesses({processes,onStateChange,onCreateChild,onReap}) {
 
         {/* Zombie list */}
         <div>
-          <div style={{color:'#fca5a5',fontSize:10,fontWeight:700,letterSpacing:1,marginBottom:8}}>💀 ZOMBIE PROCESSES ({zombies.length})</div>
+          <div style={{color:'#b91c1c',fontSize:10,fontWeight:700,letterSpacing:1,marginBottom:8}}>💀 ZOMBIE PROCESSES ({zombies.length})</div>
           {zombies.length===0?<div style={{color:'#1a1a2e',fontSize:10,padding:'8px 0'}}>No zombie processes currently.</div>:
             zombies.map(z=>(
               <div key={z.pid} style={{display:'flex',alignItems:'center',gap:10,background:'#fee2e2',border:'1px solid #ef444444',borderRadius:8,padding:'8px 12px',marginBottom:6}}>
-                <span style={{color:'#fca5a5',fontWeight:700,fontSize:12}}>#{z.pid} {z.name}</span>
+                <span style={{color:'#b91c1c',fontWeight:700,fontSize:12}}>#{z.pid} {z.name}</span>
                 <span style={{color:'#64748b',fontSize:10}}>parent: #{z.parentPid}</span>
                 <span style={{flex:1}}/>
-                <button onClick={()=>onReap(z.pid)} style={{background:'#ef444422',border:'1px solid #ef4444',color:'#fca5a5',borderRadius:6,padding:'4px 12px',fontSize:10,cursor:'pointer',fontFamily:'monospace'}}>
+                <button onClick={()=>onReap(z.pid)} style={{background:'#ef444422',border:'1px solid #ef4444',color:'#b91c1c',borderRadius:6,padding:'4px 12px',fontSize:10,cursor:'pointer',fontFamily:'monospace'}}>
                   📞 CALL wait() — REAP
                 </button>
               </div>
@@ -717,7 +717,7 @@ function SpecialProcesses({processes,onStateChange,onCreateChild,onReap}) {
             orphans.map(o=>(
               <div key={o.pid} style={{display:'flex',alignItems:'center',gap:10,background:'#fef3c7',border:'1px solid #f9731644',borderRadius:8,padding:'8px 12px',marginBottom:6}}>
                 <span style={{color:'#fdba74',fontWeight:700,fontSize:12}}>#{o.pid} {o.name}</span>
-                <span style={{color:'#4ade80',fontSize:10}}>→ adopted by Init (PID 1)</span>
+                <span style={{color:'#166534',fontSize:10}}>→ adopted by Init (PID 1)</span>
               </div>
             ))
           }
@@ -741,15 +741,15 @@ function SwappingTab({processes,onSwapOut,onSwapIn}) {
     <div style={{background:'#ffffff',border:'1px solid #d8e1ee',borderRadius:16,overflow:'hidden',fontFamily:'"Courier New",monospace'}}>
       <div style={{padding:'14px 20px',background:'linear-gradient(90deg,#f1f5f9,#f5f3ff)',borderBottom:'1px solid #d8e1ee',display:'flex',alignItems:'center',gap:10}}>
         <span>💾</span>
-        <span style={{color:'#a78bfa',fontWeight:700,fontSize:13,letterSpacing:2}}>SWAPPING — MEDIUM TERM SCHEDULER</span>
+        <span style={{color:'#6d28d9',fontWeight:700,fontSize:13,letterSpacing:2}}>SWAPPING — MEDIUM TERM SCHEDULER</span>
       </div>
       <div style={{padding:'16px 20px',display:'flex',flexDirection:'column',gap:16}}>
 
         {/* Concept */}
         <div style={{background:'#eef2f7',border:'1px solid #3b82f644',borderRadius:10,padding:'12px 16px'}}>
-          <div style={{color:'#93c5fd',fontWeight:700,fontSize:11,marginBottom:6}}>What is Swapping?</div>
+          <div style={{color:'#1d4ed8',fontWeight:700,fontSize:11,marginBottom:6}}>What is Swapping?</div>
           <div style={{color:'#64748b',fontSize:10,lineHeight:1.7}}>
-            When RAM is full, the MTS temporarily moves a <span style={{color:'#fcd34d'}}>WAITING</span> process from RAM to Hard Disk (Swap-Out).
+            When RAM is full, the MTS temporarily moves a <span style={{color:'#92400e'}}>WAITING</span> process from RAM to Hard Disk (Swap-Out).
             When needed again, it is brought back to RAM (Swap-In) and resumes from exactly where it stopped.
             This frees RAM for other processes and reduces the degree of multiprogramming.
           </div>
@@ -758,8 +758,8 @@ function SwappingTab({processes,onSwapOut,onSwapIn}) {
         {/* Memory status */}
         <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:10}}>
           {[
-            {label:'RAM USED',    val:`${usedMem} KB`,  color:'#f59e0b'},
-            {label:'RAM FREE',    val:`${freeMem} KB`,  color:'#4ade80'},
+            {label:'RAM USED',    val:`${usedMem} KB`,  color:'#92400e'},
+            {label:'RAM FREE',    val:`${freeMem} KB`,  color:'#166534'},
             {label:'ON DISK',     val:`${onDisk.length} processes`, color:'#3b82f6'},
           ].map(s=>(
             <div key={s.label} style={{background:'#eef2f7',border:'1px solid #d8e1ee',borderRadius:10,padding:'12px',textAlign:'center'}}>
@@ -771,7 +771,7 @@ function SwappingTab({processes,onSwapOut,onSwapIn}) {
 
         {/* Processes in RAM — can swap out */}
         <div>
-          <div style={{color:'#6366f1',fontSize:9,fontWeight:700,letterSpacing:2,marginBottom:8}}>◆ IN RAM — SWAP OUT (move to disk)</div>
+          <div style={{color:'#4338ca',fontSize:9,fontWeight:700,letterSpacing:2,marginBottom:8}}>◆ IN RAM — SWAP OUT (move to disk)</div>
           {inRAM.filter(p=>p.state==='WAITING').length===0&&<div style={{color:'#1a1a2e',fontSize:10,padding:'8px 0'}}>No WAITING processes to swap out.</div>}
           {inRAM.filter(p=>p.state==='WAITING').map(p=>{
             const sc=SC(p.state);
@@ -799,7 +799,7 @@ function SwappingTab({processes,onSwapOut,onSwapIn}) {
               <StateBadge state={p.state}/>
               <span style={{color:'#64748b',fontSize:10}}>on hard disk</span>
               <span style={{flex:1}}/>
-              <button onClick={()=>onSwapIn(p.pid)} style={{background:'#dcfce7',border:'1px solid #16a34a',color:'#4ade80',borderRadius:6,padding:'4px 12px',fontSize:10,cursor:'pointer',fontFamily:'monospace'}}>
+              <button onClick={()=>onSwapIn(p.pid)} style={{background:'#dcfce7',border:'1px solid #16a34a',color:'#166534',borderRadius:6,padding:'4px 12px',fontSize:10,cursor:'pointer',fontFamily:'monospace'}}>
                 ← SWAP IN
               </button>
             </div>
@@ -808,7 +808,7 @@ function SwappingTab({processes,onSwapOut,onSwapIn}) {
 
         {/* Visual diagram */}
         <div style={{background:'#eef2f7',border:'1px solid #d8e1ee',borderRadius:10,padding:'16px'}}>
-          <div style={{color:'#6366f1',fontSize:9,fontWeight:700,letterSpacing:2,marginBottom:12}}>◆ SWAP DIAGRAM</div>
+          <div style={{color:'#4338ca',fontSize:9,fontWeight:700,letterSpacing:2,marginBottom:12}}>◆ SWAP DIAGRAM</div>
           <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:20}}>
             <div style={{background:'#dbeafe',border:'2px solid #3b82f6',borderRadius:10,padding:'16px 24px',textAlign:'center',minWidth:120}}>
               <div style={{fontSize:24}}>🧠</div>
@@ -818,7 +818,7 @@ function SwappingTab({processes,onSwapOut,onSwapIn}) {
             </div>
             <div style={{display:'flex',flexDirection:'column',gap:8,alignItems:'center'}}>
               <div style={{color:'#fde68a',fontSize:11,background:'#fef3c7',border:'1px solid #a16207',borderRadius:6,padding:'4px 10px'}}>→ Swap Out</div>
-              <div style={{color:'#4ade80',fontSize:11,background:'#dcfce7',border:'1px solid #16a34a',borderRadius:6,padding:'4px 10px'}}>← Swap In</div>
+              <div style={{color:'#166534',fontSize:11,background:'#dcfce7',border:'1px solid #16a34a',borderRadius:6,padding:'4px 10px'}}>← Swap In</div>
             </div>
             <div style={{background:'#fef3c7',border:'2px solid #a16207',borderRadius:10,padding:'16px 24px',textAlign:'center',minWidth:120}}>
               <div style={{fontSize:24}}>💾</div>
@@ -872,8 +872,8 @@ function PCBDetail({process,onStateChange,onTerminate}) {
         <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:6,marginBottom:8}}>
           {Object.entries(process.registers).map(([reg,val])=>(
             <div key={reg} style={{background:'#f8fafc',borderRadius:6,padding:'6px 10px',display:'flex',justifyContent:'space-between'}}>
-              <span style={{color:'#a78bfa',fontSize:12,fontWeight:700}}>{reg}</span>
-              <span style={{color:'#e2e8f0',fontSize:12}}>{val}</span>
+              <span style={{color:'#6d28d9',fontSize:12,fontWeight:700}}>{reg}</span>
+              <span style={{color:'#334155',fontSize:12}}>{val}</span>
             </div>
           ))}
         </div>
@@ -886,7 +886,7 @@ function PCBDetail({process,onStateChange,onTerminate}) {
         {process.openFiles.length>0&&<>
           <SectionHead label="OPEN FILES" color="#818cf8"/>
           <div style={{display:'flex',flexWrap:'wrap',gap:5,marginBottom:8}}>
-            {process.openFiles.map(f=><span key={f} style={{background:'#f1f5f9',border:'1px solid #d8e1ee',color:'#94a3b8',borderRadius:5,padding:'2px 8px',fontSize:9}}>📄 {f}</span>)}
+            {process.openFiles.map(f=><span key={f} style={{background:'#f1f5f9',border:'1px solid #d8e1ee',color:'#475569',borderRadius:5,padding:'2px 8px',fontSize:9}}>📄 {f}</span>)}
           </div>
         </>}
 
@@ -903,7 +903,7 @@ function PCBDetail({process,onStateChange,onTerminate}) {
         </>}
 
         {process.state!=='TERMINATED'&&(
-          <button onClick={()=>onTerminate(process.pid)} style={{width:'100%',background:'#fee2e2',border:'1px solid #ef444466',color:'#fca5a5',borderRadius:8,padding:'8px',fontSize:11,fontWeight:700,cursor:'pointer',letterSpacing:1,fontFamily:'monospace'}}>
+          <button onClick={()=>onTerminate(process.pid)} style={{width:'100%',background:'#fee2e2',border:'1px solid #ef444466',color:'#b91c1c',borderRadius:8,padding:'8px',fontSize:11,fontWeight:700,cursor:'pointer',letterSpacing:1,fontFamily:'monospace'}}>
             💀 TERMINATE PROCESS
           </button>
         )}
@@ -931,7 +931,7 @@ function CreateProcess({onCreateProcess,processes}) {
     <div style={{background:'#ffffff',border:'1px solid #d8e1ee',borderRadius:16,overflow:'hidden',fontFamily:'"Courier New",monospace'}}>
       <div style={{padding:'12px 18px',background:'linear-gradient(90deg,#f1f5f9,#f5f3ff)',borderBottom:'1px solid #d8e1ee',display:'flex',alignItems:'center',gap:8}}>
         <span>🆕</span>
-        <span style={{color:'#a78bfa',fontWeight:700,fontSize:12,letterSpacing:2}}>CREATE PROCESS</span>
+        <span style={{color:'#6d28d9',fontWeight:700,fontSize:12,letterSpacing:2}}>CREATE PROCESS</span>
       </div>
       <div style={{padding:'14px 18px',display:'flex',flexDirection:'column',gap:10}}>
         {[
@@ -943,16 +943,16 @@ function CreateProcess({onCreateProcess,processes}) {
           <div key={f.k}>
             <div style={{color:'#475569',fontSize:9,letterSpacing:1,marginBottom:4}}>{f.label}</div>
             <input value={form[f.k]} onChange={e=>change(f.k,e.target.value)} placeholder={f.ph} type={f.type}
-              style={{width:'100%',background:'#ffffff',border:'1px solid #d8e1ee',color:'#e2e8f0',borderRadius:6,padding:'7px 10px',fontSize:11,fontFamily:'monospace',boxSizing:'border-box'}}/>
+              style={{width:'100%',background:'#ffffff',border:'1px solid #d8e1ee',color:'#334155',borderRadius:6,padding:'7px 10px',fontSize:11,fontFamily:'monospace',boxSizing:'border-box'}}/>
           </div>
         ))}
         <div>
           <div style={{color:'#475569',fontSize:9,letterSpacing:1,marginBottom:4}}>PRIORITY</div>
-          <select value={form.priority} onChange={e=>change('priority',e.target.value)} style={{width:'100%',background:'#ffffff',border:'1px solid #d8e1ee',color:'#e2e8f0',borderRadius:6,padding:'7px 10px',fontSize:11,fontFamily:'monospace'}}>
+          <select value={form.priority} onChange={e=>change('priority',e.target.value)} style={{width:'100%',background:'#ffffff',border:'1px solid #d8e1ee',color:'#334155',borderRadius:6,padding:'7px 10px',fontSize:11,fontFamily:'monospace'}}>
             {Object.entries(PRIORITY_LEVELS).map(([k,v])=><option key={k} value={k}>P{k} — {v.label}</option>)}
           </select>
         </div>
-        {err&&<div style={{color:'#fca5a5',fontSize:10,background:'#fee2e2',border:'1px solid #ef444444',borderRadius:6,padding:'6px 10px'}}>{err}</div>}
+        {err&&<div style={{color:'#b91c1c',fontSize:10,background:'#fee2e2',border:'1px solid #ef444444',borderRadius:6,padding:'6px 10px'}}>{err}</div>}
         <button onClick={submit} style={{background:'linear-gradient(90deg,#7c3aed,#6366f1)',border:'none',color:'#fff',borderRadius:8,padding:'9px',fontSize:11,fontWeight:700,cursor:'pointer',letterSpacing:1,fontFamily:'monospace'}}>
           🚀 SPAWN PROCESS
         </button>
@@ -1046,7 +1046,7 @@ export default function App() {
   const statColors={NEW:'#7c3aed',READY:'#16a34a',RUNNING:'#f59e0b',WAITING:'#3b82f6',TERMINATED:'#ef4444',SUSPENDED:'#a16207'};
 
   return (
-    <div style={{minHeight:'100vh',background:'#f4f7fb',color:'#e2e8f0',fontFamily:'"Courier New",monospace',padding:0}}>
+    <div style={{minHeight:'100vh',background:'#f4f7fb',color:'#334155',fontFamily:'"Courier New",monospace',padding:0}}>
       <div style={{position:'fixed',inset:0,pointerEvents:'none',zIndex:0,backgroundImage:'repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(15,23,42,0.025) 2px,rgba(15,23,42,0.025) 4px)'}}/>
 
       {/* Header */}
@@ -1054,7 +1054,7 @@ export default function App() {
         <div style={{display:'flex',alignItems:'center',gap:12}}>
           <div style={{width:36,height:36,borderRadius:8,background:'linear-gradient(135deg,#7c3aed,#6366f1)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:18,boxShadow:'0 0 16px #7c3aed66'}}>🖥️</div>
           <div>
-            <div style={{color:'#a78bfa',fontWeight:900,fontSize:15,letterSpacing:3}}>PCB MANAGEMENT SIMULATOR</div>
+            <div style={{color:'#6d28d9',fontWeight:900,fontSize:15,letterSpacing:3}}>PCB MANAGEMENT SIMULATOR</div>
             <div style={{color:'#64748b',fontSize:9,letterSpacing:2,marginTop:1}}>OPERATING SYSTEM — PROCESS CONTROL BLOCK VISUALIZATION</div>
           </div>
         </div>
